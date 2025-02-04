@@ -12,12 +12,8 @@
     "strict": true,
     "skipLibCheck": true,
     "paths": {
-      "fake-external-lib": [
-        "./src/fake-external-lib/index"
-      ],
-      "fake-external-component": [
-        "./src/fake-external-lib/component"
-      ]
+      "fake-external-lib": ["./src/fake-external-lib/index"],
+      "fake-external-component": ["./src/fake-external-lib/component"]
     }
   },
   "include": [
