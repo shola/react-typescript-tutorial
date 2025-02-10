@@ -2,18 +2,22 @@ import { createUser } from "fake-external-lib";
 import { useState } from "react";
 import { Equal, Expect } from "../helpers/type-utils";
 
-type Mutation = (...args: any[]) => Promise<any>;
+// Note that TArgs must extend `any[]`, and not `any`. Typescript tries to infer
+// the singular generic type, but resolves to Parameters instead of a type.
+type Mutation<TArgs extends any[], TResp> = (...args: TArgs) => Promise<TResp>;
 
-interface UseMutationReturn {
-  mutate: Mutation;
+interface UseMutationReturn<TArgs extends any[], TResp> {
+  mutate: Mutation<TArgs, TResp>;
   isLoading: boolean;
 }
 
-interface UseMutationOptions {
-  mutation: Mutation;
+interface UseMutationOptions<TArgs extends any[], TResp> {
+  mutation: Mutation<TArgs, TResp>;
 }
 
-export const useMutation = (opts: UseMutationOptions): UseMutationReturn => {
+export const useMutation = <TArgs extends any[], TResp>(
+  opts: UseMutationOptions<TArgs, TResp>
+): UseMutationReturn<TArgs, TResp> => {
   const [isLoading, setIsLoading] = useState(false);
 
   return {

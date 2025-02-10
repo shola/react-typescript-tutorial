@@ -8,18 +8,15 @@ import { ChangeEventHandler } from "react";
  * and returns it along with a union with all of its
  * keys turned to undefined.
  */
-export type InputProps = (
-  | {
-      value: string;
-      onChange: ChangeEventHandler;
-    }
-  | {
-      value?: undefined;
-      onChange?: undefined;
-    }
-) & {
+export type InputProps = AllOrNone<{
+  value: string;
+  onChange: ChangeEventHandler;
+}> & {
   label: string;
 };
+
+type ConvertToUndefined<T extends object> = Partial<Record<keyof T, undefined>>;
+type AllOrNone<T extends object> = T | ConvertToUndefined<T>;
 
 export const Input = ({ label, ...props }: InputProps) => {
   return (

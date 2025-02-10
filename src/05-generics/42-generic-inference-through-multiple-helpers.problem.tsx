@@ -1,14 +1,15 @@
 import { Equal, Expect } from "../helpers/type-utils";
 
-interface Button {
-  value: string;
+interface Button<ValueT> {
+  value: ValueT;
   label: string;
 }
 
-interface ButtonGroupProps {
-  buttons: Button[];
-  onClick: (value: string) => void;
+interface ButtonGroupProps<ValueT> {
+  buttons: Button<ValueT>[];
+  onClick: (value: ValueT) => void;
 }
+
 
 /**
  * In this exercise, we have a component called ButtonGroup. It takes an array
@@ -19,7 +20,9 @@ interface ButtonGroupProps {
  *
  * 1. Try to solve this problem using generics.
  */
-const ButtonGroup = (props: ButtonGroupProps) => {
+const ButtonGroup = <ValueT extends string>(
+  props: ButtonGroupProps<ValueT>
+) => {
   return (
     <div>
       {props.buttons.map((button) => {
