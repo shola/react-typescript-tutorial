@@ -24,8 +24,19 @@
 
 import { Equal, Expect } from "../helpers/type-utils";
 
-export const Wrapper = (props: any) => {
+// This joins the value for each possible value of `as` with
+// the matching component props. This is lightweight and preferred.
+type WrapperProps<T extends keyof JSX.IntrinsicElements> = {
+  as: T;
+} & React.ComponentProps<T>;
+
+export const Wrapper = <T extends keyof JSX.IntrinsicElements>(
+  props: WrapperProps<T>
+) => {
   const Comp = props.as;
+
+  // I thought that I could type assert Wrapper<T> but that doesn't work.
+  // There's no escaping asserting props as `any` in HOC sometimes (all the time?)
   return <Comp {...(props as any)}></Comp>;
 };
 

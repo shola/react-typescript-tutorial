@@ -31,6 +31,11 @@ type Props<T> = {
  * By doing it this way, we preserve the generic context of the function
  * being passed in.
  */
+declare module "react" {
+  function forwardRef<T, P = {}>(
+    render: (props: P, ref: React.Ref<T>) => React.ReactNode
+  ): (props: P & React.RefAttributes<T>) => React.ReactNode;
+}
 export const Table = <T,>(
   props: Props<T>,
   ref: ForwardedRef<HTMLTableElement>,

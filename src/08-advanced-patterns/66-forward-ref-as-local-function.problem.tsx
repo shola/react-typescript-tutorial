@@ -6,20 +6,20 @@ import { Equal, Expect } from "../helpers/type-utils";
  * give fixedForwardRef a type signature that allows it to
  * work with the example below.
  */
-function fixedForwardRef(
-  render: (props: any, ref: any) => any,
-): (props: any) => any {
+function fixedForwardRef<T, P = {}>(
+  render: (props: P, ref: React.Ref<T>) => React.ReactNode
+): (props: P & React.RefAttributes<T>) => React.ReactNode {
   return forwardRef(render) as any;
 }
 
-type Props<T> = {
-  data: T[];
-  renderRow: (item: T) => React.ReactNode;
+type Props<Row> = {
+  data: Row[];
+  renderRow: (item: Row) => React.ReactNode;
 };
 
-export const Table = <T,>(
-  props: Props<T>,
-  ref: ForwardedRef<HTMLTableElement>,
+export const Table = <Row,>(
+  props: Props<Row>,
+  ref: ForwardedRef<HTMLTableElement>
 ) => {
   return <table ref={ref} />;
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { Equal, Expect } from "../helpers/type-utils";
 
@@ -17,7 +17,11 @@ interface ModalChildProps {
   closeModal: () => void;
 }
 
-const Modal = ({ children }: any) => {
+const Modal = ({
+  children,
+}: {
+  children: (props: ModalChildProps) => ReactNode;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -31,7 +35,7 @@ const Modal = ({ children }: any) => {
         <div>
           <h1>Modal</h1>
         </div>,
-        document.getElementById("modal-root")!,
+        document.getElementById("modal-root")!
       )}
     </>
   );

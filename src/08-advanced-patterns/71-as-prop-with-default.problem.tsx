@@ -1,10 +1,10 @@
 import { ElementType } from "react";
 import { Equal, Expect } from "../helpers/type-utils";
 
-export const Link = <TAs extends ElementType>(
+export const Link = <TAs extends ElementType = "a">(
   props: {
-    as: TAs;
-  } & React.ComponentPropsWithoutRef<TAs>,
+    as?: TAs;
+  } & React.ComponentPropsWithoutRef<TAs>
 ) => {
   const { as: Comp = "a", ...rest } = props;
   return <Comp {...rest}></Comp>;

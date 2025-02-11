@@ -1,13 +1,27 @@
 import { Router, useRouter } from "fake-external-lib";
 import { Equal, Expect } from "../helpers/type-utils";
 
-export const withRouter = <TProps,>(Component: React.ComponentType<TProps>) => {
+export const withRouter = <TProps,>(
+  Component: (props: TProps) => React.ReactNode
+): ((props: Omit<TProps, "router">) => React.ReactNode) => {
   const NewComponent = (props: Omit<TProps, "router">) => {
     const router = useRouter();
     return <Component {...(props as TProps)} router={router} />;
   };
 
-  NewComponent.displayName = `withRouter(${Component.displayName})`;
+  // TIL React.FC is not recommended, use render functions instead:
+  // https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/function_components/
+  // NewComponent.displayName = `withRouter(${
+  //   (Component as React.FC<TProps>).displayName
+  // })`;
+
+  NewComponent.displayname = `withRouter(${
+    (
+      Component as {
+        displayName?: string;
+      }
+    ).displayName
+  })`;
 
   return NewComponent;
 };
