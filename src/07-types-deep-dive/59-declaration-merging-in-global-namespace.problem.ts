@@ -8,6 +8,13 @@ declare global {
   }
 }
 
+declare global {
+  namespace React {
+    interface MyAwesomeInterface {
+      bar: string;
+    }
+  }
+}
 /**
  * We can use a feature called declaration merging in TypeScript to
  * CHANGE interfaces in the global namespace.

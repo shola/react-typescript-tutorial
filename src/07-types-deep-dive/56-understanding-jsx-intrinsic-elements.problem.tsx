@@ -1,5 +1,5 @@
 /**
- * 1. What is JSX.IntrinsicElements? CMD-click on .IntrinsicElements below
+ 1. What is JSX.IntrinsicElements? CMD-click on .IntrinsicElements below
  * to go to its definition.
  *
  * Hint - remember to go to the original definition of JSX.IntrinsicElements
@@ -26,5 +26,14 @@ export type Example = JSX.IntrinsicElements;
  *
  * 4. Now change it back, before anyone notices.
  */
+
+// interface JSX {
+//   IntrinsicElements: {
+//     myNewElement: {
+//       foo: string;
+//     };
+//   };
+// }
+
 
 <myNewElement foo="123" />;

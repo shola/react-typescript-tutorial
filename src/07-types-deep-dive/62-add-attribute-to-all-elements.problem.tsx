@@ -5,6 +5,13 @@
  * 1. Make use of declaration merging in the global scope to add
  * a new attribute to all React elements.
  */
+declare global {
+  namespace React {
+    interface HTMLAttributes<T> {
+      testId?: string;
+    }
+  }
+}
 
 <>
   <div testId="123" />
