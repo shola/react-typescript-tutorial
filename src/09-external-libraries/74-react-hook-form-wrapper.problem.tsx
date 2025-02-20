@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { useForm, DefaultValues, FieldValues } from "react-hook-form";
 import { Equal, Expect, Extends } from "../helpers/type-utils";
 
 /**
@@ -12,7 +12,11 @@ import { Equal, Expect, Extends } from "../helpers/type-utils";
  *
  * defaultValues as DefaultValues<TValues>
  */
-const useCustomForm = (defaultValues: any) => {
+
+// Instead of a type assertion, just annotate the defaultValues param
+const useCustomForm = <T extends FieldValues>(
+  defaultValues: DefaultValues<T>
+) => {
   const form = useForm({
     defaultValues: defaultValues,
   });
@@ -31,7 +35,7 @@ useCustomForm();
 
 useCustomForm(
   // @ts-expect-error defaultValues must be an object
-  2,
+  2
 );
 
 const customForm = useCustomForm({
